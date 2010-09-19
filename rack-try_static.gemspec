@@ -6,7 +6,7 @@ require "base64"
 
 Gem::Specification.new do |s|
   s.name = "rack-try_static"
-  s.version = "0.0.5"
+  s.version = "0.1.0"
   s.date = Time.now.strftime '%Y-%m-%d'
 
   s.authors = ["gmarik"]
