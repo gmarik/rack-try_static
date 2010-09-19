@@ -4,13 +4,6 @@ require 'rack'
 require 'rack/contrib/try_static'
 require 'rack/mock'
 
-class DummyApp
-  def call(env)
-    [200, {}, ["Hello World"]]
-  end
-end
-
-
 def request(options = {})
   options.merge!({
     :urls => %w[/],
@@ -20,19 +13,20 @@ def request(options = {})
   @request = 
     Rack::MockRequest.new(
       Rack::TryStatic.new( 
-        DummyApp.new, options))
+        lambda {[200, {}, ["Hello World"]]}, 
+        options))
 end
 
 describe "Rack::TryStatic" do
-  context 'when tries fail' do
-    it 'should not serve' do
+  context 'when file cannot be found' do
+    it 'should call call app' do
       res = request(:try => ['html']).get('/documents')
       res.should.be.ok
       res.body.should == "Hello World"
     end
   end
 
-  context 'when tries succeed' do
+  context 'when file can be found' do
     it 'should serve first found' do
       res = request(:try => ['.html', '/index.html', '/index.htm']).get('/documents')
       res.should.be.ok
@@ -40,12 +34,11 @@ describe "Rack::TryStatic" do
     end
   end
 
-  context 'when tries not needed' do
+  context 'when path_info maps directly to file' do
     it 'should serve existing' do
       res = request(:try => ['/index.html']).get('/documents/existing.html')
       res.should.be.ok
       res.body.strip.should == "existing.html"
     end
   end
-
 end

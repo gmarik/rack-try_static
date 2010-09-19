@@ -1,6 +1,18 @@
-require 'rack/static'
+module Rack
 
-module ::Rack
+  # The Rack::TryStatic middleware delegates requests to Rack::Static middleware 
+  # trying to match a static file
+  # 
+  # Examples
+  #
+  # use Rack::TryStatic, 
+  #   :root => "public",  # static files root dir
+  #   :urls => %w[/],     # match all requests 
+  #   :try => ['.html', 'index.html', '/index.html'] # try these postfixes sequentially
+  #
+  #   uses same options as Rack::Static with extra :try option which is an array
+  #   of postfixes to find desired file
+
   class TryStatic
 
     def initialize(app, options)
