@@ -40,4 +40,12 @@ describe "Rack::TryStatic" do
     end
   end
 
+  context 'when tries not needed' do
+    it 'should serve existing' do
+      res = request(:try => ['/index.html']).get('/documents/existing.html')
+      res.should.be.ok
+      res.body.strip.should == "existing.html"
+    end
+  end
+
 end

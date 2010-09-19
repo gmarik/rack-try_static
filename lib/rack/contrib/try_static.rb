@@ -5,7 +5,7 @@ module ::Rack
 
     def initialize(app, options)
       @app = app
-      @try = [*options.delete(:try)]
+      @try = ['', *options.delete(:try)]
       @static = ::Rack::Static.new(
         lambda { [404, {}, []] }, 
         options)
