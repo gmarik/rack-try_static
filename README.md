@@ -5,7 +5,7 @@ Install gem
 
     gem install rack-try_static
 
-Add insert <code>Rack::TryStatic</code> middleware to your <code>config.ru</code>(stack):
+Add <code>Rack::TryStatic</code> middleware to your <code>config.ru</code>(stack):
 
     require 'rack'
     require 'rack/contrib/try_static'
@@ -20,6 +20,11 @@ Add insert <code>Rack::TryStatic</code> middleware to your <code>config.ru</code
 
 Profit!
 
+About
+=============
+
+<code>TryStatic</code> middleware serves static content trying to find matching file.
+When match found it gets delegated to <code>Rack::Static</code> to be processed.
 
 Examples
 =============
