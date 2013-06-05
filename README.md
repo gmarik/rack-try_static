@@ -35,4 +35,4 @@ TODO
 ===============
  * &radic; specs
  * &radic; docs
- * merge to rack-cotrib
+ * &radic; merge to rack-cotrib
