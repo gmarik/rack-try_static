@@ -16,7 +16,7 @@ Add <code>Rack::TryStatic</code> middleware to your <code>config.ru</code>(stack
         :try => ['.html', 'index.html', '/index.html'] # try these postfixes sequentially
 
     # otherwise 404 NotFound
-    run lambda { [404, {'Content-Type' => 'text/html'}, ['whoops! Not Found']]}
+    run proc { [404, {'Content-Type' => 'text/html'}, ['whoops! Not Found']]}
 
 Profit!
 
